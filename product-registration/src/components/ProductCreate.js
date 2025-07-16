@@ -1,76 +1,100 @@
-// Import React library
-import React from "react";
+import React, { useState } from "react";
 
-// Define the ProductCreate component
-function ProductCreate() {
+function ProductCreate({ onAddProduct }) {
+  const [productName, setProductName] = useState("");
+  const [productCode, setProductCode] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
+  const [productCategory, setProductCategory] = useState("Electronics");
+  const [productDescription, setProductDescription] = useState("");
 
-  // Define styles for the "Back to Main Page" button
-  const backButtonStyle = {
-    marginTop: 15,              // Space above the button
-    marginLeft: 15,             // Space to the left
-    backgroundColor: "gray",    // Gray background color
-    color: "white",             // White text color
-    padding: "10px 20px",       // Padding: 10px top/bottom, 20px left/right
-    border: "none",             // No border
-    borderRadius: 5,            // Rounded corners
-    cursor: "pointer",          // Cursor changes to pointer on hover
-    fontSize: 16,               // Text size
+  const saveProduct = () => {
+    if (!productName) {
+      alert("Product name is required.");
+      return;
+    }
+    if (!productCode) {
+      alert("Product code is required.");
+      return;
+
+    }
+
+    const newProduct = {
+      productName,
+      productCode,
+      releaseDate,
+      productCategory,
+      productDescription,
+    };
+
+    onAddProduct(newProduct);
+    alert("Product added successfully!");
+
+    setProductName("");
+    setProductCode("");
+    setReleaseDate("");
+    setProductCategory("Electronics");
+    setProductDescription("");
   };
 
-  // JSX returned by the component
+  const backButtonStyle = {
+    marginTop: 15,
+    marginLeft: 15,
+    backgroundColor: "gray",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: 5,
+    cursor: "pointer",
+    fontSize: 16,
+  };
+
   return (
     <div
       style={{
-        backgroundColor: "#f4f4f4",        // Light gray background for the form container
-        width: 600,                        // Set fixed width of the form
-        borderRadius: 5,                   // Rounded corners for the box
-        padding: "20px 40px 20px 20px",    // Padding: top/right/bottom/left
-        margin: "10px auto",               // Vertical margin and horizontal centering
-        fontFamily: "Arial, sans-serif",   // Use Arial font
+        backgroundColor: "#f4f4f4",
+        width: 600,
+        borderRadius: 5,
+        padding: "20px 40px 20px 20px",
+        margin: "10px auto",
+        fontFamily: "Arial, sans-serif",
       }}
     >
-
       <h1 style={{ color: "blue" }}>Product Create Page</h1>
 
       <label>Product Name</label><br />
       <input
         type="text"
+        value={productName}
+        onChange={(e) => setProductName(e.target.value)}
         placeholder="Product Name"
-        style={{
-          width: "100%",           // Full width input
-          padding: 8,              // Inner space
-          marginBottom: 15         // Space below the input
-        }}
-      /><br />
+        style={{ width: "100%", padding: 8, marginBottom: 15 }}
+      />
+      <br />
 
       <label>Product Code</label><br />
       <input
         type="text"
+        value={productCode}
+        onChange={(e) => setProductCode(e.target.value)}
         placeholder="Product Code"
-        style={{
-          width: "100%",           // Full width
-          padding: 8,              // Inner space
-          marginBottom: 15         // Bottom margin
-        }}
-      /><br />
+        style={{ width: "100%", padding: 8, marginBottom: 15 }}
+      />
+      <br />
 
       <label>Release Date</label><br />
       <input
         type="date"
-        style={{
-          width: "100%",           // Full width
-          padding: 8,              // Padding inside input
-          marginBottom: 15         // Margin below input
-        }}
-      /><br />
+        value={releaseDate}
+        onChange={(e) => setReleaseDate(e.target.value)}
+        style={{ width: "100%", padding: 8, marginBottom: 15 }}
+      />
+      <br />
 
       <label>Product Category</label><br />
       <select
-        style={{
-          width: "100%",           // Full width dropdown
-          padding: 8,              // Padding for text space
-          marginBottom: 15         // Space below dropdown
-        }}
+        value={productCategory}
+        onChange={(e) => setProductCategory(e.target.value)}
+        style={{ width: "100%", padding: 8, marginBottom: 15 }}
       >
         <option>Electronics</option>
         <option>Clothing</option>
@@ -78,28 +102,29 @@ function ProductCreate() {
         <option>Home & Kitchen</option>
         <option>Toys & Games</option>
         <option>Health & Beauty</option>
-      </select><br />
+      </select>
+      <br />
 
       <label>Product Description</label><br />
       <textarea
+        value={productDescription}
+        onChange={(e) => setProductDescription(e.target.value)}
         placeholder="Product Description"
         rows={4}
-        style={{
-          width: "100%",           // Take full width of container
-          padding: 8,              // Inner spacing
-          marginBottom: 20         // Space below textarea
-        }}
-      ></textarea><br />
+        style={{ width: "100%", padding: 8, marginBottom: 20 }}
+      ></textarea>
+      <br />
 
       <button
+        onClick={saveProduct}
         style={{
-          backgroundColor: "blue",   // Blue background
-          color: "white",            // White text
-          padding: "10px 20px",      // Padding inside button
-          border: "none",            // No border
-          borderRadius: 5,           // Rounded corners
-          cursor: "pointer",         // Pointer on hover
-          fontSize: 16               // Font size
+          backgroundColor: "blue",
+          color: "white",
+          padding: "10px 20px",
+          border: "none",
+          borderRadius: 5,
+          cursor: "pointer",
+          fontSize: 16,
         }}
       >
         Save
@@ -108,12 +133,8 @@ function ProductCreate() {
       <button style={backButtonStyle}>
         Back to Main Page
       </button>
-
     </div>
   );
 }
 
-// Export the component so it can be imported in other files
 export default ProductCreate;
-
-  
