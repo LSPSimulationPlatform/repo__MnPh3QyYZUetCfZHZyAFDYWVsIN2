@@ -30,7 +30,7 @@ function ProductCreate({ onAddProduct }) {
     alert("Product added successfully!");
 
     setProductName("");
-    setProductCode("");
+    setProductCode("");  
     setReleaseDate("");
     setProductCategory("Electronics");
     setProductDescription("");
